@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <title>Abhirucha ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #800000;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      padding-top: 100px;
+    }
+
+    h1 {
+      font-size: 2em;
+    }
+
+    .buttons {
+      margin-top: 40px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s ease;
+    }
+
+    #yesBtn {
+      background-color: #fff;
+      color: #800000;
+    }
+
+    #noBtn {
+      background-color: #ffcccc;
+      color: #800000;
+      position: absolute;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #popup {
+      position: fixed;
+      bottom: 20px;
+      width: 90%;
+      margin: 0 auto;
+      background-color: #fff;
+      color: #800000;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .butterfly {
+      position: fixed;
+      font-size: 40px;
+      animation: fly 4s linear infinite;
+      left: 50%;
+      bottom: 0;
+    }
+
+    @keyframes fly {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-50vh) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+
+    canvas#confetti {
+      position: fixed;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    #hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 2em;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(100vh); opacity: 0; }
+    }
+
+    #yesBtn:hover {
+      animation: heartAnimation 0.5s forwards;
+    }
+
+    @keyframes heartAnimation {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.5);
+        color: red;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="questionText"></h1>
+    <h1> <b>Abhirucha</b> 💕</h1>
+    <p>doni button kamche ahet click karun bagh.....</p>
+   
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="sayYes()">हो 😍</button>
+      <button id="noBtn" onmouseover="moveNoButton()">नाही 🙈</button>
+    </div>
+  </div>
+
+  <div id="popup" class="hidden">
+    <h2> Kay re Baba Puna Nahi ? &#128540;</h2>
+    <p> ho mhann na please 🥺❤️</p>
+  </div>
+
+  <div class="butterfly hidden" id="butterfly">🦋</div>
+
+  <canvas id="confetti"></canvas>
+
+  <div id="hearts"></div>
+
+  <audio autoplay loop>
+    <source src="yourmusic.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    let moveCount = 0;
+
+    // Typewriter Effect
+    const txt = 'तुला एक विचारायचं होतं... ❤️';
+    let i = 0;
+    function typeWriter() {
+      if (i < txt.length) {
+        document.getElementById("questionText").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+    window.onload = typeWriter;
+
+    // Move NO button
+    function moveNoButton() {
+      const noBtn = document.getElementById("noBtn");
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+
+      moveCount++;
+      if (moveCount >= 3) {
+        document.getElementById("popup").classList.remove("hidden");
+      }
+    }
+
+    // Yes Button
+    function sayYes() {
+      startConfetti();
+      document.getElementById("butterfly").classList.remove("hidden");
+      startHeartRain();
+      setTimeout(() => {
+        window.open("https://wa.me/9370631695?text= Kay Sangaych Ahe...❤️😍 Kashi Ahe Majhi Coding", "_blank");
+      }, 2500);
+    }
+
+    // Confetti Animation
+    let canvas = document.getElementById("confetti");
+    let ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    function startConfetti() {
+      particles = Array.from({ length: 150 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        speed: Math.random() * 3 + 2,
+        radius: Math.random() * 4 + 1,
+        color: `hsl(${Math.random() * 360}, 100%, 70%)`
+      }));
+      animateConfetti();
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.y += p.speed;
+        if (p.y > canvas.height) p.y = 0;
+      }
+      requestAnimationFrame(animateConfetti);
+    }
+
+    // Heart Rain Effect
+    function startHeartRain() {
+      setInterval(() => {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerText = "❤️😍";
+        heart.style.left = Math.random() * 100 + "vw";
+        document.getElementById("hearts").appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }, 300);
+    }
+  </script>
+</body>
+</html>
