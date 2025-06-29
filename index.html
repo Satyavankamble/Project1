@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhirucha ❤️</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#d63384">
+<link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="description" content="A special page for Abhirucha with love and gifts.">
+  <meta name="keywords" content="Abhirucha, Birthday, Love, Gifts, Puzzel Game">
+  <meta name="author" content="Satyavan Kamble">
+  <meta property="og:title" content="Abhirucha ❤️">
+  <meta property="og:description" content="A special page for Abhirucha with love and gifts.">
+  <meta property="og:image" content="icon-192.png">
+  <meta property="og:type" content="website">
+ </head>
+<body>
+
+  <h1>Abhirucha ❤️</h1>
+  <p>
+    I have made this page special for you 💖
+  </p>
+
+  <div class="projects">
+    <div class="card">
+      <h3>🎂 A gift for your Birthday </h3>
+      <p></p>
+      <a href="https://satyavankamble.github.io/Abhrucha_Puzzel/" target="_blank">🌐 Click Me 😍</a>
+    </div>
+    <div class="card">
+      <h3>🧩 Puzzel Game</h3>
+      <p></p>
+      <a href="https://satyavankamble.github.io/Abhirucha-Brithday-/" target="_blank" >🌐 Click Me 😍</a>
+    </div>
+  </div>
+
+  <footer>
+    – Satyavan 💌
+  </footer>
+  <script>
+    const emojis = ["💖", "💕", "💘", "💓", "💗", "❤️", "🩷", "💞"];
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+      heart.style.fontSize = 18 + Math.random() * 28 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 150);
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(() => console.log("✅ Service Worker Registered"))
+      .catch(err => console.log("❌ SW Error", err));
+  }
+</script>
+
+
+</body>
+</html>
